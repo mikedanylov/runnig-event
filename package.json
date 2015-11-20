@@ -2,7 +2,7 @@
   "name"         : "node-running-events",
   "version"      : "0.0.0",
   "description"  : "Running events app",
-  "main"         : "server.js",
+  "main"         : "index.js",
   "author"       : "mikedanylov",
   "dependencies" : 
   {

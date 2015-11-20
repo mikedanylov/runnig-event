@@ -20,8 +20,8 @@
     app.use(methodOverride());
 
     // listen (start app with node server.js) ======================================
-    app.listen(8080);
-    console.log("Started at http://localhost:8080");
+    // app.listen(8080);
+    // console.log("Started at http://localhost:8080");
 
     // routes ======================================================================
 
