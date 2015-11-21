@@ -61,7 +61,7 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container" ng-controller="EventsController">
 
         <!-- Jumbotron Header -->
         <header class="jumbotron hero-spacer">
@@ -74,7 +74,7 @@
         <hr>
 
         <!-- Page Features -->
-        <div class="row text-center" ng-controller="EventsController" infinite-scroll="loadMore()" infinite-scroll-distance="1">
+        <div class="row text-center">
             <!-- Testing div -->
             <!-- <div>{{eventsList}}</div> -->
             <div class="col-lg-12 text-left">
@@ -82,7 +82,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 hero-feature pull-left" ng-repeat="event in eventsDisplayed track by $index">
                 <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
+                    <img src="http://placehold.it/850x500" alt="">
                     <div class="caption">
                         <div class="event-name">
                             <h4>{{event.eventName}}</h4>    
@@ -105,6 +105,7 @@
         <!-- /.row -->
 
         <hr>
+        <div class="scroll-detector" infinite-scroll="loadMore()" infinite-scroll-distance="1"></div>
 
         <!-- Footer -->
         <footer>

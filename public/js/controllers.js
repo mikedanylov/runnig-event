@@ -15,15 +15,6 @@
     $scope.geocoder = new google.maps.Geocoder();
     $scope.eventsDisplayed = []
 
-    // make http request to api
-    // $http.jsonp("https://api-test.mynextrun.com/site/v1/event-stats").then(function(response){
-    //   console.log('Success!');
-    //   console.log(response);
-    // }, function(response){
-    //   console.log('Failed!');
-    //   console.log(response);
-    // });
-
     // get json data about running events
     var fetchCount = 0;
 
@@ -35,6 +26,15 @@
     // or returns not formated JSON
     // getEventsData("https://api-test.mynextrun.com/site/v1/event-stats");
 
+    var locationsLoaded = 3;
+    loadEventsLocations = setInterval(function(){
+      if (locationsLoaded < $scope.eventsList.length){
+        getEventLocation($scope.eventsList[locationsLoaded]);
+        locationsLoaded++;
+      }
+      else
+        clearInterval(loadEventsLocations);
+    }, 2100);
 
     $scope.loadMore = function(){
       // console.log("loading more");
@@ -43,7 +43,7 @@
         $scope.eventsDisplayed.push($scope.eventsList[lastIndex + 1]);
         
         // get location for this event
-        getEventLocation($scope.eventsDisplayed[lastIndex]);
+        // getEventLocation($scope.eventsDisplayed[lastIndex]);
       }
     }
 
@@ -78,9 +78,9 @@
       $scope.geocoder.geocode({'location': latlng}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           evnt['eventLocation'] = results[0]['formatted_address'];
-          // console.log(event['eventLocation']);
-          // console.log(event);
           $scope.$apply();
+        } else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+          console.log('OVER_QUERY_LIMIT');
         } else {
           console.log('Geocoder failed due to: ' + status);
         }
@@ -100,6 +100,15 @@
         }
       });
     }
+
+  function sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+      if ((new Date().getTime() - start) > milliseconds){
+        break;
+      }
+    }
+  }
 
   }]);
 
