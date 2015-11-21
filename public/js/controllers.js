@@ -37,22 +37,32 @@
 
 
     $scope.loadMore = function(){
-      console.log("loading more");
+      // console.log("loading more");
       var lastIndex = $scope.eventsDisplayed.length - 1;
-      if (lastIndex <= $scope.eventsList.length - 1){
-        for(var i = 0; i < 1; i++) {
-          $scope.eventsDisplayed.push($scope.eventsList[lastIndex + i]);
-        }  
+      if (lastIndex <= $scope.eventsList.length - 1) {
+        $scope.eventsDisplayed.push($scope.eventsList[lastIndex + 1]);
+        
+        // get location for this event
+        getEventLocation($scope.eventsDisplayed[lastIndex]);
       }
     }
 
     function getEventsData(url){
-      $http.get(url).then(function(response){
+      $http.get(url, {
+        headers: {
+          "Accept": "application/json"
+        }
+      }).then(function(response){
         // console.log(response);
         $scope.eventsList = response.data.events;
         $scope.totalDist = response.data.distanceCount;
         $scope.numEvents = response.data.eventCount;
         $scope.eventsDisplayed = $scope.eventsList.slice(0, 4);
+        $scope.eventsDisplayed.forEach(function(each){
+          console.log(each);
+          getEventLocation(each);
+        });
+
       }, function(response){
         console.log('Failed to fetch events');
         console.log(response);
@@ -63,11 +73,11 @@
       });
     }
 
-    function getEventLocation(event){
-      var latlng = new google.maps.LatLng(event.latitude, event.longitude);
+    function getEventLocation(evnt){
+      var latlng = new google.maps.LatLng(evnt.latitude, evnt.longitude);
       $scope.geocoder.geocode({'location': latlng}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
-          event['eventLocation'] = results[0]['formatted_address'];
+          evnt['eventLocation'] = results[0]['formatted_address'];
           // console.log(event['eventLocation']);
           // console.log(event);
           $scope.$apply();
