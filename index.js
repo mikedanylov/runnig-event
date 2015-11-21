@@ -7,7 +7,7 @@
     var morgan = require('morgan');             // log requests to the console (express4)
     var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
     var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-
+    var port = process.env.PORT || 8080;
     // configuration =================
 
     // mongoose.connect('mongodb://node:nodeuser@mongo.onmodulus.net:27017/uwO3mypu');     // connect to mongoDB database on modulus.io
@@ -20,7 +20,9 @@
     app.use(methodOverride());
 
     // listen (start app with node server.js) ======================================
-    app.listen(8080);
+    app.listen(port, function() {
+        console.log('Our app is running on http://localhost:' + port);
+    });
     console.log("Started at http://localhost:8080");
 
     // routes ======================================================================
