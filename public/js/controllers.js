@@ -15,8 +15,16 @@
     // wait until response with events list is received
     asyncWaitEvents().then(function(response){
       console.log('Success: ' + response);
+      console.log($scope.eventsList);
+      $scope.eventsList.forEach(function(each){
+        // $timeout(getEventLocation(each), 110);
+        getEventLocation(each);
+      });
 
       // get one location response from google and render it
+      // angular.forEach($scope.eventsList, function(each){
+      //   console.log(each);  
+      // });
       getEventLocation($scope.eventsList[0]);
 
     }, function(response){
@@ -48,7 +56,7 @@
     }
 
     function eventsLoaded(){
-      return !($scope.eventsList.length == 0);
+      return $scope.eventsList.length > 0;
     }
 
     function asyncWaitEvents() {
