@@ -17,27 +17,20 @@
       console.log('Success: ' + response);
       console.log($scope.eventsList);
       $scope.eventsList.forEach(function(each){
-        // $timeout(getEventLocation(each), 110);
-        getEventLocation(each);
+        $timeout(getEventLocation(each), 200);
       });
-
-      // get one location response from google and render it
-      // angular.forEach($scope.eventsList, function(each){
-      //   console.log(each);  
-      // });
-      getEventLocation($scope.eventsList[0]);
-
     }, function(response){
       console.log('Failed: ' + response);
     });
 
     function getEventsData(url){
       $http.get(url).then(function(response){
-      $scope.eventsList = response.data.events;
-      $scope.totalDist = response.data.distanceCount;
-      $scope.numEvents = response.data.eventCount;
+        $scope.eventsList = response.data.events;
+        $scope.totalDist = response.data.distanceCount;
+        $scope.numEvents = response.data.eventCount;
       }, function(response){
         console.log('Failed to fetch events: ' + response);
+        $timeout(getEventsData(url), 200);
       });
     }
 
