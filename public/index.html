@@ -74,11 +74,13 @@
         <hr>
 
         <!-- Page Features -->
-        <div class="row text-center" ng-controller="EventsController">
+        <div class="row text-center" ng-controller="EventsController" infinite-scroll="loadMore()" infinite-scroll-distance="1">
+            <!-- Testing div -->
+            <!-- <div>{{eventsList}}</div> -->
             <div class="col-lg-12 text-left">
                 <h2>{{numEvents}} running events with total distance of {{totalDist}} km</h2>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 hero-feature pull-left" ng-repeat="event in eventsList">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 hero-feature pull-left" ng-repeat="event in eventsDisplayed track by $index">
                 <div class="thumbnail">
                     <img src="http://placehold.it/800x500" alt="">
                     <div class="caption">
@@ -133,6 +135,7 @@
 
     <!-- Controllers -->
     <script type="text/javascript" src="js/controllers.js"></script>
+    <script type="text/javascript" src="js/ng-infinite-scroll.min.js"></script>
 
 
 
