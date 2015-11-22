@@ -4,7 +4,6 @@ var express = require('express');
 var wagner = require('wagner-core');
 var mongoose = require('mongoose');
 var port = process.env.PORT || 8080;
-// var EventSchema = require('./schema/Event.js');
 
 require('./models')(wagner);
 
