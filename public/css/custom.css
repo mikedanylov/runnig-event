@@ -4,9 +4,34 @@
 }
 
 .event-location {
-  height: 50px;
+  height: 60px;
 }
 
 .scroll-detector {
   height: 20px;
+}
+
+.thumbnail {
+  width: 100%;
+  display: block;
+  -webkit-filter: grayscale(00%);
+  -moz-filter: grayscale(00%);
+  -o-filter: grayscale(00%);
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+.thumbnail:hover {
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+h2 {
+  height: 50px;
 }

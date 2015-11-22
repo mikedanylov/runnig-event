@@ -17,10 +17,8 @@
 
     // get json data about running events
     var fetchCount = 0;
-
-    // works as expected
-    getEventsData('js/api-test.json');
-    // getEventsData("http://jsonplaceholder.typicode.com/posts");
+    getEventsData('js/api-test.json'); // works as expected
+    // getEventsData("http://jsonplaceholder.typicode.com/posts"); // works as expected
     
     // doesn't work presumably because server does not allow cross-origin resource sharing
     // or returns not formated JSON
@@ -35,7 +33,7 @@
       else
         clearInterval(loadEventsLocations);
     }, 2100);
-
+    
     $scope.loadMore = function(){
       // console.log("loading more");
       var lastIndex = $scope.eventsDisplayed.length - 1;
@@ -50,7 +48,8 @@
     function getEventsData(url){
       $http.get(url, {
         headers: {
-          "Accept": "application/json"
+          "Accept": "application/json",
+          "Content-Type": "application/json"
         }
       }).then(function(response){
         // console.log(response);
@@ -90,25 +89,6 @@
     function eventsLoaded(){
       return $scope.eventsList.length > 0;
     }
-
-    function asyncWaitEvents() {
-      return $q(function(resolve, reject) {
-        if (eventsLoaded()){
-          resolve(true);
-        } else {
-          reject(false);
-        }
-      });
-    }
-
-  function sleep(milliseconds) {
-    var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-      if ((new Date().getTime() - start) > milliseconds){
-        break;
-      }
-    }
-  }
 
   }]);
 

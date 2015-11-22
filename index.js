@@ -13,6 +13,6 @@ app.use(express.static(__dirname + '/public'));
 //   res.sendfile('public/index.html');
 // });
 
-app.listen(port, function() {
+app.listen(port, '192.168.1.109', function() {
     console.log('Our app is running on http://localhost:' + port);
 });
