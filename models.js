@@ -8,7 +8,7 @@ var uristring =
 
 module.exports = function(wagner) {
 
-  // Makes connection asynchronously.  Mongoose will queue up database
+  // Makes connection asynchronously. Mongoose will queue up database
   // operations and release them when the connection is complete.
   mongoose.connect(uristring, function (err, res) {
     if (err) {

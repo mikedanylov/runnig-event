@@ -1,8 +1,6 @@
 
-// var server = require('./server');
 var express = require('express');
 var wagner = require('wagner-core');
-var mongoose = require('mongoose');
 var port = process.env.PORT || 8080;
 
 require('./models')(wagner);
