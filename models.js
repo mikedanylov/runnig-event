@@ -3,7 +3,7 @@ var _ = require('underscore');
 var uristring =
     // process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
-    // process.env.PROD_MONGODB ||
+    process.env.PROD_MONGODB ||
     'mongodb://localhost:27017/running-events';
 
 module.exports = function(wagner) {
