@@ -2,6 +2,7 @@
 var express = require('express');
 var wagner = require('wagner-core');
 var port = process.env.PORT || 8080;
+var ip = process.env.IP || '192.168.1.109';
 
 require('./models')(wagner);
 
@@ -13,6 +14,6 @@ app.use(express.static(__dirname + '/public'));
 //   res.sendfile('public/index.html');
 // });
 
-app.listen(port, '192.168.1.109', function() {
+app.listen(port, ip, function() {
     console.log('Our app is running on http://localhost:' + port);
 });
