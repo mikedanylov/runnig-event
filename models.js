@@ -4,12 +4,11 @@ var uristring =
     // process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
     process.env.PROD_MONGODB ||
+    // 'mongodb://user:user@ds057234.mongolab.com:57234/heroku_wrjj4s6l' ||
     'mongodb://localhost:27017/running-events';
 
 module.exports = function(wagner) {
 
-  // Makes connection asynchronously. Mongoose will queue up database
-  // operations and release them when the connection is complete.
   mongoose.connect(uristring, function (err, res) {
     if (err) {
     console.log ('ERROR connecting to: ' + uristring + '. ' + err);
