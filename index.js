@@ -15,5 +15,5 @@ app.use(express.static(__dirname + '/public'));
 // });
 
 app.listen(port, ip, function() {
-    console.log('Our app is running on http://localhost:' + port);
+    console.log('Our app is running on ' + ip + ':' + port);
 });
