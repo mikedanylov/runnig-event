@@ -1,10 +1,10 @@
 (function(){
   var app = angular.module('runningEventsApp', ['infinite-scroll']);
 
-  // app.config(['$httpProvider', function($httpProvider) {
-  //   $httpProvider.defaults.useXDomain = true;
-  //   delete $httpProvider.defaults.headers.common['X-Requested-With'];
-  // }]);
+  app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  }]);
 
   app.controller('EventsController', ['$scope', '$http', '$timeout', '$q', function ($scope, $http, $timeout, $q) {
 
@@ -24,6 +24,7 @@
     // or returns not formated JSON
     // getEventsData("https://api-test.mynextrun.com/site/v1/event-stats");
 
+    // load each location name every 2s because of google maps api restriction
     var locationsLoaded = 3;
     loadEventsLocations = setInterval(function(){
       if (locationsLoaded < $scope.eventsList.length){
@@ -37,12 +38,8 @@
     $scope.loadMore = function(){
       // console.log("loading more");
       var lastIndex = $scope.eventsDisplayed.length - 1;
-      if (lastIndex <= $scope.eventsList.length - 1) {
+      if (lastIndex <= $scope.eventsList.length - 1)
         $scope.eventsDisplayed.push($scope.eventsList[lastIndex + 1]);
-        
-        // get location for this event
-        // getEventLocation($scope.eventsDisplayed[lastIndex]);
-      }
     }
 
     function getEventsData(url){
@@ -58,7 +55,7 @@
         $scope.numEvents = response.data.eventCount;
         $scope.eventsDisplayed = $scope.eventsList.slice(0, 4);
         $scope.eventsDisplayed.forEach(function(each){
-          console.log(each);
+          // console.log(each);
           getEventLocation(each);
         });
 
